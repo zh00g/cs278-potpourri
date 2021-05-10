@@ -31,7 +31,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 
-const Registration = ({user, updateUser, updateLogin}) => {
+const Registration = ({ user, updateUser, updateLogin }) => {
   const OrTypography = withStyles({
     root: {
       color: "#FF7A52"
@@ -87,9 +87,9 @@ const Registration = ({user, updateUser, updateLogin}) => {
   }
   return (
     <ThemeProvider theme={theme}>
-      
-      <Box className="App-header"> 
-      <img src={signup} className="App-logo" alt="logo" />
+
+      <Box className="App-header">
+        <img src={signup} className="App-logo" alt="logo" />
         <Box className="textentry">
           <OrTypography variant="h6">
             Name
@@ -154,8 +154,8 @@ const Registration = ({user, updateUser, updateLogin}) => {
 
         <Box className="textentry">
           <Button
-            variant = "contained"
-            color = "primary"
+            variant="contained"
+            color="primary"
             onClick={handleSubmit}>
             Next3 </Button>
         </Box>
@@ -210,46 +210,46 @@ const CustomizeProfile = ({ spices, goals, types, user, updateUser, updateGoals,
       <ThemeProvider theme={theme}>
         <img src={myspices} className="App-logo" alt="logo" />
         <OTypography> What brings you to potpourri? </OTypography>
-        <Spices 
-          arr={goals} 
-          type={"goal"} 
-          styles2={theme.palette.accentOr} 
-          user={user} 
+        <Spices
+          arr={goals}
+          type={"goal"}
+          styles2={theme.palette.accentOr}
+          user={user}
           updateUser={updateUser}
           updateArr={updateGoals}
-          > 
+        >
         </Spices>
         <OTypography> Do you have any dietary restrictions? </OTypography>
-        <Spices 
-          arr={spices} 
-          type={"spice"} 
-          styles2={theme.palette.accentGr} 
-          user={user} 
-          updateUser={updateUser} 
+        <Spices
+          arr={spices}
+          type={"spice"}
+          styles2={theme.palette.accentGr}
+          user={user}
+          updateUser={updateUser}
           updateArr={updateSpices}
         > </Spices>
         <OTypography> What meal types are you interested in? </OTypography>
-        <Spices 
-          arr={types} 
-          type={"mealtype"} 
-          styles={theme.palette.accent} 
-          styles2={theme.palette.accent2} 
-          user={user} 
+        <Spices
+          arr={types}
+          type={"mealtype"}
+          styles={theme.palette.accent}
+          styles2={theme.palette.accent2}
+          user={user}
           updateUser={updateUser}
-          updateArr= {updateMealTypes}> 
+          updateArr={updateMealTypes}>
         </Spices>
-        <Box className = "paddingbox"> </Box>
-        <Button 
-            variant="contained"
-            color="primary"
-          >
-            Submit!
+        <Box className="paddingbox"> </Box>
+        <Button
+          variant="contained"
+          color="primary"
+        >
+          Submit!
             </Button>
       </ThemeProvider>
     </div>
   )
 }
-const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr}) => {
+const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr }) => {
   const [modal, setModal] = useState(false);
   const [selected, setSelected] = useState([]);
   const useStyles = makeStyles((theme) => ({
@@ -293,9 +293,10 @@ const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr}) => {
       updateUser({ mealtypes: selected })
       updateArr(selected)
     }
-    console.log(selected, type);
-    console.log(user);
+    // console.log(selected, type);
+    // console.log(user);
   }
+
   var color = "";
   var style;
   var buttonText = "";
@@ -373,16 +374,16 @@ const ListCheck = ({ i, handleCheck, item, color, style }, ...elems) => {
 const Onboard = () => {
   return (
     <div>
-      <Box className="App-header"> 
+      <Box className="App-header">
         <img src={onboarding} className="App-logo" alt="logo" />
         <Button
-            color="primary"
-            variant="contained"
-            // onClick={toggleOnboard}
-          >
-            Next
+          color="primary"
+          variant="contained"
+        // onClick={toggleOnboard}
+        >
+          Next
         </Button>
-        </Box> 
+      </Box>
     </div>
   )
 }
@@ -390,19 +391,19 @@ const Onboard = () => {
 const GettingStarted = () => {
   return (
     <div>
-       <Box className="App-header"> 
+      <Box className="App-header">
         <img src={gettingstartedimg} className="App-logo" alt="logo" />
         <Button
-            color="primary"
-            variant="contained"
-            // onClick={toggleOnboard}
-          >
-            Next
+          color="primary"
+          variant="contained"
+        // onClick={toggleOnboard}
+        >
+          Next
         </Button>
-        </Box>
+      </Box>
     </div>
   )
- 
+
 }
 
 function App() {
@@ -466,6 +467,11 @@ function App() {
     })
     console.log(user)
   }
+  const OTypography = withStyles({
+    root: {
+      color: "black"
+    }
+  })(Typography);
 
 
   return (
@@ -474,25 +480,37 @@ function App() {
         <Box className="App-header">
           <Onboard></Onboard>
           <GettingStarted></GettingStarted>
-          <Registration updateLogin = {setLogin} user={user} updateUser={setUser}></Registration>
-          <CustomizeProfile 
-            user={user} 
-            updateUser={setUser} 
-            spices={spiceList} 
-            goals={goalList} 
+          <Registration updateLogin={setLogin} user={user} updateUser={setUser}></Registration>
+          <CustomizeProfile
+            user={user}
+            updateUser={setUser}
+            spices={spiceList}
+            goals={goalList}
             types={typeList}
-            updateGoals = {setGoals}
-            updateSpices = {setSpices}
-            updateMealTypes = {setMealTypes}
-            > 
+            updateGoals={setGoals}
+            updateSpices={setSpices}
+            updateMealTypes={setMealTypes}
+          >
           </CustomizeProfile>
+          <Box className="paddingbox"></Box>
           <Button
             color="primary"
             variant="contained"
             onClick={createProfile}
           >
             Finish
-        </Button>
+          </Button>
+          <Box className="paddingbox">
+            <OTypography> Your Info </OTypography>
+          {
+                Object.entries(user).map(([key, val]) => 
+                    <OTypography key={key}>{key}: {val}</OTypography>
+                )
+            }
+          </Box>
+        <Box>
+
+      </Box>
 
           {/* {onboard && <img src={onboarding} className="App-logo" alt="logo" />}
           {gettingstarted && <img src={gettingstartedimg} className="App-logo" alt="logo" />} */}
