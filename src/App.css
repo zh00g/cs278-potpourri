@@ -8,6 +8,11 @@
 } */
 .App-logo {
   /* height: 40vmin; */
+  width: 40%;
+  pointer-events: none;
+}
+.App-logo2 {
+  /* height: 40vmin; */
   width: 30%;
   pointer-events: none;
 }

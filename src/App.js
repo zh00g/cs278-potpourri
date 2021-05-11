@@ -157,7 +157,7 @@ const Registration = ({ user, updateUser, updateLogin }) => {
         </Box>
 
        
-        <Link to="/spices"> 
+        {/* <Link to="/spices">  */}
           <Button
             variant="contained"
             color="primary"
@@ -165,7 +165,7 @@ const Registration = ({ user, updateUser, updateLogin }) => {
             >
             Next 
             </Button>
-          </Link>
+          {/* </Link> */}
       </Box>
     </ThemeProvider>
 
@@ -384,38 +384,42 @@ const ListCheck = ({ i, handleCheck, item, color, style }, ...elems) => {
 }
 
 const Onboard = () => {
+  const history = useHistory();
   return (
     <div>
       <Box className="App-header">
         <img src={onboarding} className="App-logo" alt="logo" />
-        <Link to="/gettingstarted"> 
+        {/* <Link to="/gettingstarted">  */}
         <Button
           color="primary"
           variant="contained"
+          onClick = {() => history.push('./gettingstarted')}
         // onClick={toggleOnboard}
         >
           Next
         </Button>
-        </Link>
+        {/* </Link> */}
       </Box>
     </div>
   )
 }
 
 const GettingStarted = () => {
+  const history = useHistory();
   return (
     <div>
       <Box className="App-header">
-        <img src={gettingstartedimg} className="App-logo" alt="logo" />
-        <Link to="/registration"> 
+        <img src={gettingstartedimg} className="App-logo2" alt="logo" />
+        {/* <Link to="/registration">  */}
         <Button
           color="primary"
           variant="contained"
         // onClick={toggleOnboard}
+        onClick = {() => history.push('./registration')}
         >
           Next
         </Button>
-        </Link>
+        {/* </Link> */}
       </Box>
     </div>
   )
