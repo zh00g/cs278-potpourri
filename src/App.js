@@ -4,7 +4,9 @@ import signup from './signup2.png';
 import myspices from './myspices.png';
 import confirmation from './confirmation.png';
 import './App.css';
-import React, { useState } from "react";
+import firebase from './firebase.js';
+
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -212,8 +214,11 @@ const CustomizeProfile = ({ createProfile, spices, goals, types, user, updateUse
       }
     },
   });
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     createProfile()
+    // const itemsRef = firebase.database().ref('items');
+    // itemsRef.push(user)
     history.push('/confirm')
   }
   return (
@@ -431,6 +436,12 @@ const Confirmation = ({user}) => {
       color: "black"
     }
   })(Typography);
+  useEffect(() => {
+    // Update the document title using the browser API
+    const itemsRef = firebase.database().ref('items');
+    itemsRef.push(user)
+  });
+
   return (
     <div>
       <Box className="App-header">
