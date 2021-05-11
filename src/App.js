@@ -2,13 +2,15 @@ import onboarding from './onboard.png';
 import gettingstartedimg from './gettingstarted2.png';
 import signup from './signup2.png';
 import myspices from './myspices.png';
+import confirmation from './confirmation.png';
 import './App.css';
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 import {
   Grid,
@@ -31,7 +33,9 @@ import {
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 
+
 const Registration = ({ user, updateUser, updateLogin }) => {
+  const history = useHistory();
   const OrTypography = withStyles({
     root: {
       color: "#FF7A52"
@@ -73,7 +77,7 @@ const Registration = ({ user, updateUser, updateLogin }) => {
       email: state.email,
       tagline: state.tagline,
     })
-
+    history.push('/spices')
     console.log("info", state);
 
   }
@@ -152,21 +156,24 @@ const Registration = ({ user, updateUser, updateLogin }) => {
 
         </Box>
 
-        <Box className="textentry">
+       
+        <Link to="/spices"> 
           <Button
             variant="contained"
             color="primary"
-            onClick={handleSubmit}>
-            Next3 </Button>
-        </Box>
-        {/* </form> */}
+            onClick={handleSubmit}
+            >
+            Next 
+            </Button>
+          </Link>
       </Box>
     </ThemeProvider>
 
   )
 }
 
-const CustomizeProfile = ({ spices, goals, types, user, updateUser, updateGoals, updateSpices, updateMealTypes }) => {
+const CustomizeProfile = ({ createProfile, spices, goals, types, user, updateUser, updateGoals, updateSpices, updateMealTypes }) => {
+  const history = useHistory()
   const OTypography = withStyles({
     root: {
       color: "black"
@@ -205,6 +212,10 @@ const CustomizeProfile = ({ spices, goals, types, user, updateUser, updateGoals,
       }
     },
   });
+  const handleSubmit = () => {
+    createProfile()
+    history.push('/confirm')
+  }
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -242,6 +253,7 @@ const CustomizeProfile = ({ spices, goals, types, user, updateUser, updateGoals,
         <Button
           variant="contained"
           color="primary"
+          onClick = {handleSubmit}
         >
           Submit!
             </Button>
@@ -376,6 +388,7 @@ const Onboard = () => {
     <div>
       <Box className="App-header">
         <img src={onboarding} className="App-logo" alt="logo" />
+        <Link to="/gettingstarted"> 
         <Button
           color="primary"
           variant="contained"
@@ -383,6 +396,7 @@ const Onboard = () => {
         >
           Next
         </Button>
+        </Link>
       </Box>
     </div>
   )
@@ -393,6 +407,7 @@ const GettingStarted = () => {
     <div>
       <Box className="App-header">
         <img src={gettingstartedimg} className="App-logo" alt="logo" />
+        <Link to="/registration"> 
         <Button
           color="primary"
           variant="contained"
@@ -400,13 +415,36 @@ const GettingStarted = () => {
         >
           Next
         </Button>
+        </Link>
       </Box>
     </div>
   )
 
 }
-
+const Confirmation = ({user}) => {
+  const OTypography = withStyles({
+    root: {
+      color: "black"
+    }
+  })(Typography);
+  return (
+    <div>
+      <Box className="App-header">
+        <img src={confirmation} className="App-logo" alt="logo" />
+        <Box className="paddingbox">
+            <OTypography> Your Info </OTypography>
+          {
+                Object.entries(user).map(([key, val]) => 
+                    <OTypography key={key}>{key}: {val}</OTypography>
+                )
+            }
+          </Box>
+      </Box>
+    </div>
+  )
+}
 function App() {
+  const history = useHistory();
   const [onboard, setOnboard] = useState(true)
   const [gettingstarted, setGettingStarted] = useState(false)
   const [signUp, setSignUp] = useState(false)
@@ -467,6 +505,7 @@ function App() {
     })
     console.log(user)
   }
+
   const OTypography = withStyles({
     root: {
       color: "black"
@@ -475,24 +514,37 @@ function App() {
 
 
   return (
+    <Router> 
     <ThemeProvider theme={theme}>
       <Box className="App">
         <Box className="App-header">
-          <Onboard></Onboard>
-          <GettingStarted></GettingStarted>
-          <Registration updateLogin={setLogin} user={user} updateUser={setUser}></Registration>
-          <CustomizeProfile
-            user={user}
-            updateUser={setUser}
-            spices={spiceList}
-            goals={goalList}
-            types={typeList}
-            updateGoals={setGoals}
-            updateSpices={setSpices}
-            updateMealTypes={setMealTypes}
-          >
-          </CustomizeProfile>
-          <Box className="paddingbox"></Box>
+          <Switch> 
+          <Route path="/gettingstarted">
+              <GettingStarted></GettingStarted>
+          </Route>
+          <Route path="/registration">
+              <Registration updateLogin={setLogin} user={user} updateUser={setUser}></Registration>
+          </Route>
+          <Route path="/spices">
+              <CustomizeProfile
+                user={user}
+                updateUser={setUser}
+                spices={spiceList}
+                goals={goalList}
+                types={typeList}
+                updateGoals={setGoals}
+                updateSpices={setSpices}
+                updateMealTypes={setMealTypes}
+                createProfile = {createProfile}
+              >
+              </CustomizeProfile>
+          </Route>
+          <Route path="/confirm">
+              <Confirmation user = {user}></Confirmation> 
+          </Route>
+          <Route path="/">
+              <Onboard></Onboard>
+          </Route>
           <Button
             color="primary"
             variant="contained"
@@ -500,14 +552,9 @@ function App() {
           >
             Finish
           </Button>
-          <Box className="paddingbox">
-            <OTypography> Your Info </OTypography>
-          {
-                Object.entries(user).map(([key, val]) => 
-                    <OTypography key={key}>{key}: {val}</OTypography>
-                )
-            }
-          </Box>
+          </Switch>
+          <Box className="paddingbox"></Box>
+          
         <Box>
 
       </Box>
@@ -540,6 +587,7 @@ function App() {
         </Box>
       </Box>
     </ThemeProvider>
+    </Router>
   );
 }
 
