@@ -100,7 +100,7 @@ const Registration = ({ user, updateUser, updateLogin }) => {
                 </OrTypography>
 
           <TextField fullWidth
-            label="FName"
+            label="Name"
             name="fname"
             size="small"
             variant="outlined"
@@ -283,7 +283,7 @@ const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr }) => 
     // setSelected({ selected: [...selected, val] });
     const currentIndex = selected.indexOf(val);
     const newChecked = [...selected];
-    newChecked.push(val);
+    if(!selected.includes(val)) newChecked.push(val);
 
     setSelected(newChecked);
   };
@@ -335,7 +335,7 @@ const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr }) => 
         {buttonText}
       </Button>
       <Dialog open={modal} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Choose Spices!</DialogTitle>
+        <DialogTitle id="form-dialog-title">{buttonText}</DialogTitle>
         <DialogContent>
           <DialogActions>
             <div>
