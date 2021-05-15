@@ -158,16 +158,16 @@ const Registration = ({ user, updateUser, updateLogin }) => {
 
         </Box>
 
-       
+
         {/* <Link to="/spices">  */}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            >
-            Next 
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Next
             </Button>
-          {/* </Link> */}
+        {/* </Link> */}
       </Box>
     </ThemeProvider>
 
@@ -258,7 +258,7 @@ const CustomizeProfile = ({ createProfile, spices, goals, types, user, updateUse
         <Button
           variant="contained"
           color="primary"
-          onClick = {handleSubmit}
+          onClick={handleSubmit}
         >
           Submit!
             </Button>
@@ -288,7 +288,7 @@ const Spices = ({ arr, type, styles, styles2, user, updateUser, updateArr }) => 
     // setSelected({ selected: [...selected, val] });
     const currentIndex = selected.indexOf(val);
     const newChecked = [...selected];
-    if(!selected.includes(val)) newChecked.push(val);
+    if (!selected.includes(val)) newChecked.push(val);
 
     setSelected(newChecked);
   };
@@ -398,7 +398,7 @@ const Onboard = () => {
         <Button
           color="primary"
           variant="contained"
-          onClick = {() => history.push('./gettingstarted')}
+          onClick={() => history.push('./gettingstarted')}
         // onClick={toggleOnboard}
         >
           Next
@@ -419,8 +419,8 @@ const GettingStarted = () => {
         <Button
           color="primary"
           variant="contained"
-        // onClick={toggleOnboard}
-        onClick = {() => history.push('./registration')}
+          // onClick={toggleOnboard}
+          onClick={() => history.push('./registration')}
         >
           Next
         </Button>
@@ -430,7 +430,7 @@ const GettingStarted = () => {
   )
 
 }
-const Confirmation = ({user}) => {
+const Confirmation = ({ user }) => {
   const OTypography = withStyles({
     root: {
       color: "black"
@@ -447,13 +447,21 @@ const Confirmation = ({user}) => {
       <Box className="App-header">
         <img src={confirmation} className="App-logo" alt="logo" />
         <Box className="paddingbox">
-            <OTypography> Your Info </OTypography>
+        {/* <Button
+                color="primary"
+                variant="contained"
+                arget="_blank" 
+                href="https://cs278site.wixsite.com/potpourri"
+              >
+                View Site
+                </Button> */}
+          <OTypography> Your Info </OTypography>
           {
-                Object.entries(user).map(([key, val]) => 
-                    <OTypography key={key}>{key}: {val}</OTypography>
-                )
-            }
-          </Box>
+            Object.entries(user).map(([key, val]) =>
+              <OTypography key={key}>{key}: {val}</OTypography>
+            )
+          }
+        </Box>
       </Box>
     </div>
   )
@@ -529,59 +537,59 @@ function App() {
 
 
   return (
-    <Router> 
-    <ThemeProvider theme={theme}>
-      <Box className="App">
-        <Box className="App-header">
-          <Switch> 
-          <Route path="/gettingstarted">
-              <GettingStarted></GettingStarted>
-          </Route>
-          <Route path="/registration">
-              <Registration updateLogin={setLogin} user={user} updateUser={setUser}></Registration>
-          </Route>
-          <Route path="/spices">
-              <CustomizeProfile
-                user={user}
-                updateUser={setUser}
-                spices={spiceList}
-                goals={goalList}
-                types={typeList}
-                updateGoals={setGoals}
-                updateSpices={setSpices}
-                updateMealTypes={setMealTypes}
-                createProfile = {createProfile}
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Box className="App">
+          <Box className="App-header">
+            <Switch>
+              <Route path="/gettingstarted">
+                <GettingStarted></GettingStarted>
+              </Route>
+              <Route path="/registration">
+                <Registration updateLogin={setLogin} user={user} updateUser={setUser}></Registration>
+              </Route>
+              <Route path="/spices">
+                <CustomizeProfile
+                  user={user}
+                  updateUser={setUser}
+                  spices={spiceList}
+                  goals={goalList}
+                  types={typeList}
+                  updateGoals={setGoals}
+                  updateSpices={setSpices}
+                  updateMealTypes={setMealTypes}
+                  createProfile={createProfile}
+                >
+                </CustomizeProfile>
+              </Route>
+              <Route path="/confirm">
+                <Confirmation user={user}></Confirmation>
+              </Route>
+              <Route path="/">
+                <Onboard></Onboard>
+              </Route>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={createProfile}
               >
-              </CustomizeProfile>
-          </Route>
-          <Route path="/confirm">
-              <Confirmation user = {user}></Confirmation> 
-          </Route>
-          <Route path="/">
-              <Onboard></Onboard>
-          </Route>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={createProfile}
-          >
-            Finish
+                Finish
           </Button>
-          </Switch>
-          <Box className="paddingbox"></Box>
-          
-        <Box>
+            </Switch>
+            <Box className="paddingbox"></Box>
 
-      </Box>
+            <Box>
 
-          {/* {onboard && <img src={onboarding} className="App-logo" alt="logo" />}
+            </Box>
+
+            {/* {onboard && <img src={onboarding} className="App-logo" alt="logo" />}
           {gettingstarted && <img src={gettingstartedimg} className="App-logo" alt="logo" />} */}
-          {/* {signUp && <img src={signup} className="App-logo" alt="logo" />} */}
-          {/* {signUp && <Registration> </Registration>} */}
-          {/* {signUp && <Spices spices={spiceList}> </Spices>}
+            {/* {signUp && <img src={signup} className="App-logo" alt="logo" />} */}
+            {/* {signUp && <Registration> </Registration>} */}
+            {/* {signUp && <Spices spices={spiceList}> </Spices>}
           {signUp && <CustomizeProfile user={user} updateUser={setUser} spices={spiceList} goals={goalList} types={typeList}> </CustomizeProfile>} */}
-          {/* <CustomizeProfile user={user} updateUser={setUser} spices={spiceList} goals={goalList} types={typeList}> </CustomizeProfile> */}
-          {/* {onboard && <Button
+            {/* <CustomizeProfile user={user} updateUser={setUser} spices={spiceList} goals={goalList} types={typeList}> </CustomizeProfile> */}
+            {/* {onboard && <Button
             color="primary"
             variant="contained"
             onClick={toggleOnboard}
@@ -599,11 +607,17 @@ function App() {
 
 
 
+          </Box>
         </Box>
-      </Box>
-    </ThemeProvider>
+      </ThemeProvider>
     </Router>
   );
 }
 
 export default App;
+
+
+
+
+
+
